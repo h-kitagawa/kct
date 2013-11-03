@@ -169,4 +169,5 @@ platex kct-out.tex &> /dev/null
 ptex2pdf -l -od '-f ptex-ipa.map' kct-out.tex &>/dev/null
 
 mv kct-out.pdf $NOW
-rm kcto.* kct-out.*
+rm kcto.* kct-out.* euptex-?.{fmt,log}
+
