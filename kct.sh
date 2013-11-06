@@ -110,7 +110,7 @@ out[5] = io.open('$UPUUOUT','r')
 out[6] = io.open('$LTJOUT','r')
 
 print('\\\\documentclass{jsarticle}')
-print('\\\\usepackage[dvipdfmx]{xcolor}')
+print('\\\\usepackage[dvipdfmx]{graphicx,xcolor}')
 print('\\\\definecolor{green}{rgb}{0,0.5,0}')
 print('\\\\usepackage[lines=40]{geometry}')
 print('\\\\usepackage{longtable,booktabs}')
@@ -164,7 +164,7 @@ print('\\\\end{document}')
 
 
 EOF
-lua $SRC > kct-out.tex
+texlua $SRC > kct-out.tex
 platex kct-out.tex &> /dev/null
 ptex2pdf -l -od '-f ptex-ipa.map' kct-out.tex &>/dev/null
 
