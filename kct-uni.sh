@@ -3,7 +3,7 @@
 NOW=`pwd`
 
 cd /tmp
-rm kcto.* kct-uni-out.*
+rm kcto.* kct-uni-out.* &>/dev/null
 
 UTBL=`mktemp kcto.XXXXXX`
 echo "0) Table:     $UTBL"
@@ -48,9 +48,12 @@ echo "C) LuaTeX-ja: $LTOUT"
 luatex "\\input luatexja.sty \\def\\outfile{$LTOUT}\\input $SRC" &>/dev/null
 rm /tmp/luatexja.pdf
 
-
+echo "sorting..."
 $NOW/kct-uni-2.lua "$UTBL" "$UPOUT" "$XEOUT" "$LTOUT" > kct-uni-out.tex
+
+echo "1st run of uplatex"
 uplatex kct-uni-out.tex &> /dev/null
+echo "2nd run of uplatex"
 ptex2pdf -l -u -od '-f uptex-ipa.map' kct-uni-out.tex &>/dev/null
 mv kct-uni-out.pdf $NOW
 rm kcto.* kct-uni-out.*
