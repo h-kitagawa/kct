@@ -26,20 +26,26 @@ local cx = function(n)
            or ((n==15) and 'blue' or 'red'))
      .. '}{' .. tostring(n) .. '}'
 end
+local cy = function(n, x)
+   return cx(n) .. '（\\textcolor{'
+      .. (x=='0' and 'black}{\\bf 和}' or 'blue}{\\bf 欧}' )
+      .. '）'
+end
 
 local moji = function(c)
   return '\\fcolorbox{cyan}{white}{\\Large\\kchar"'.. c .. '}'
 end
 
 local z = {}
+local zu, zx, zlc, zlj
 for il in out[0]:lines() do
-    for k=1,3 do 
-      z[k]=tonumber(out[k]:read('*l'))
-    end
+    zu = out[1]:read('*n')
+    zx = out[2]:read('*n')
+    zlc, zlj = (out[3]:read('*l')):match('(%w*)-(%w*)')
     local za, zb, zc = il:match('(%w*) (%w*) (.)')
     print(
       moji(zb) .. '&\\tt ' .. za .. '&\\tt ' .. zb
-     .. cx(z[1]).. cx(z[2]).. cx(z[3])
+	 .. cx(zu).. cx(zx).. cy(zlc, zlj)
 	 .. (zc=='F' and '&Fullwidth' or (zc=='W' and '&Windows' or ''))
      .. '\\\\')
 end

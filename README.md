@@ -15,8 +15,8 @@ pTeX/upTeX/XeTeX/LuaTeX-ja の非漢字部の
  * /tmp を作業領域とします．
  * 作業ファイル (kcto.*, euptex-{c,u}.{fmt,log}) は自動消去されます．
  * Lua スクリプト実行に，texlua を使用します．
- * [u]ptex-ipa.map と IPA フォントを使用します．
-    TeX Live をフルインストールしていれば大丈夫でしょう．
+ * kct.sh 実行には ptex-ipa.map と IPA フォントを使用します．
+ * kct-uni.sh 実行には uptex-kozuka-pr6n.map と小塚 Pr6N フォントを使用します．
 
 このリポジトリ内にある kct[-uni]-out.pdf は以下の環境で作りました：
  * pTeX: '3.1415926-p3.4 (utf8.euc) (TeX Live 2014/dev)'
