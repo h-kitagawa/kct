@@ -28,7 +28,7 @@ local cx = function(n)
 end
 local cy = function(n, x)
    return cx(n) .. '（\\textcolor{'
-      .. (x=='0' and 'black}{\\bf 和}' or 'blue}{\\bf 欧}' )
+      .. (x==0 and 'black}{\\bf 和}' or 'blue}{\\bf 欧}' )
       .. '）'
 end
 
@@ -42,12 +42,15 @@ for il in out[0]:lines() do
     zu = out[1]:read('*n')
     zx = out[2]:read('*n')
     zlc, zlj = (out[3]:read('*l')):match('(%w*)-(%w*)')
+    zlc, zlj = tonumber(zlc), tonumber(zlj)
     local za, zb, zc = il:match('(%w*) (%w*) (.)')
+--    if (zlc==11 and zu==18)or(zlc==12 and zu~=18) then
     print(
       moji(zb) .. '&\\tt ' .. za .. '&\\tt ' .. zb
 	 .. cx(zu).. cx(zx).. cy(zlc, zlj)
 	 .. (zc=='F' and '&Fullwidth' or (zc=='W' and '&Windows' or ''))
      .. '\\\\')
+--    end
 end
 for k=0,3 do z[k]=out[k]:close() end
 
