@@ -42,6 +42,12 @@ XEOUT=`mktemp kcto.XXXXXX`
 echo "B) XeTeX:     $XEOUT"
 xetex "\\def\\outfile{$XEOUT}\\input $SRC" &>/dev/null
 
+### LuaTeX
+
+LTOUT=`mktemp kcto.XXXXXX`
+echo "C) LuaTeX:    $LTOUT"
+luatex "\\def\\outfile{$LTOUT}\\input $SRC" &>/dev/null
+
 ### LuaTeX-ja
 
 cat << 'EOF' > $SRC
@@ -55,14 +61,14 @@ cat << 'EOF' >> $SRC
 \end
 EOF
 
+LJOUT=`mktemp kcto.XXXXXX`
+trap "rm $TMP* 2>/dev/null" EXIT
+echo "D) LuaTeX-ja: $LJOUT"
+luatex "\\def\\outfile{$LJOUT}\\input $SRC" &>/dev/null
 
-LTOUT=`mktemp kcto.XXXXXX`
-echo "C) LuaTeX-ja: $LTOUT"
-luatex "\\def\\outfile{$LTOUT}\\input $SRC" 
-rm /tmp/luatexja.pdf
 
 echo "sorting..."
-$NOW/kct-uni-2.lua "$UTBL" "$UPOUT" "$XEOUT" "$LTOUT" > kct-uni-out.tex
+$NOW/kct-uni-2.lua "$UTBL" "$UPOUT" "$XEOUT" "$LTOUT" "$LJOUT" > kct-uni-out.tex
 
 echo "1st run of uplatex"
 uplatex kct-uni-out.tex #&> /dev/null
