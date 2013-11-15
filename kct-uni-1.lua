@@ -16,12 +16,17 @@ for line in tbl:lines() do
       jis, uni = line:match ('0x(2[0-9A-D]...).*Windows: U%+(....)')
       buf[#buf+1] = {tonumber(uni,16), jis, uni, ' W' }
    end
+   if buf[#buf] and line:match('%[200.%]') then
+      buf[#buf][5]=true
+   end
 end
 tbl:close()
 
 table.sort(buf, function (a,b) return (a[1]<b[1]) end)
 for i=1,#buf do
-   out:write(string.format('%X', tonumber(buf[i][2], 16)) .. ' ' .. buf[i][3] ..  buf[i][4] .. '\n')
+   out:write(string.format('%X', tonumber(buf[i][2], 16)) .. ' ' 
+                .. buf[i][3] ..  buf[i][4] 
+                .. (buf[i][5] and 'N' or '!') .. '\n')
 end
 out:close()
 
