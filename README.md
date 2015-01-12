@@ -19,3 +19,6 @@ pTeX, upTeX, XeTeX, LuaTeX[-ja] の非漢字部（JIS X 0213 1--13区）の
  * LuaTeX: 'beta-0.77.0-2013103021 (rev 4648) '
  * LuaTeX-ja: commit e5a7e05 (Revert previous two commits, and updated manuals.)
 
+##test-jis_char.lua について
+付録として，JIS2004 (or JIS2000/90JIS) の全文字を含む dvi を作成し，
+dvipdfmx でどう処理されるかを確認するための test-jis_char.lua を入れました．
