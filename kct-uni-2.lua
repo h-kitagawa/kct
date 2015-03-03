@@ -73,7 +73,7 @@ for il in src[0]:lines() do
     local za, zb, zc, zd = il:match('(%w*) (%w*) (.)(.)')
 --    if (zlc==11 and zu==18)or(zlc==12 and zu~=18) then
     tprint(
-      moji(zb) .. '&\\tt 0x' .. zb .. '&\\tt U+' .. za .. '&'
+      moji(zb) .. '&\\tt U+' .. zb .. '&\\tt 0x' .. za .. '&'
 	 .. czt(zp, zd) .. '&' .. cxt(zu).. '&' .. cxt(zx) .. '&'
          .. cxt(zl) .. '&' .. cyt(zlc, zlj)  
 	 .. (zc=='F' and '&Fullwidth' or (zc=='W' and '&Windows' or ''))
