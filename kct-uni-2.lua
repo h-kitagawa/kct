@@ -33,7 +33,7 @@ dprint('##')
 dprint("## JIS04 characters which can't be represent by one UCS character")
 dprint("## are omitted from this table.")
 dprint('##')
-dprint('## UCS\tJIS\tupTeX\tXeTeX\tLuaTeX\tLuaTeX-ja\tNote')
+dprint('## UCS\tJIS\t区\t点\tpTeX\tupTeX\tXeTeX\tLuaTeX\tLuaTeX-ja\tNote')
 
 local cxt = function(n)
   return '\\textcolor{' .. 
@@ -56,6 +56,10 @@ end
 local cyd = function(n, x)
    return cxd(n) .. (x==0 and 'J\t' or 'A\t' )
 end
+local czd = function(n, x)
+   return (x=='N' and '-' or tostring(n) ) .. '\t'
+end
+
 
 local moji = function(c)
   return '\\fcolorbox{cyan}{white}{\\Large\\kchar"'.. c .. '}'
@@ -79,6 +83,9 @@ for il in src[0]:lines() do
 	 .. (zc=='F' and '&Fullwidth' or (zc=='W' and '&Windows' or ''))
      .. '\\\\')
     dprint('U+' .. zb .. '\t0x' .. za .. '\t'
+         .. (tonumber(za,16)//256-32) .. '\t'
+         .. (tonumber(za,16)%256-32) .. '\t'
+         .. czd(zp,zd) 
 	 .. cxd(zu).. cxd(zx).. cxd(zl) .. cyd(zlc, zlj)
               .. (zd=='N' and '[JIS04] ' or '')
               .. (zc=='F' and 'Fullwidth' or (zc=='W' and 'Windows' or ''))
